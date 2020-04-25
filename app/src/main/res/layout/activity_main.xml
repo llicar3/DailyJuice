@@ -4,15 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:visibility="visible">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <EditText
+        android:id="@+id/Daily Juice"
+        android:layout_width="94dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="632dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Daily Juice"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="424dp"
+        android:layout_height="110dp"
+        android:text="Quote of the Day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="133dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="424dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="4dp"
+        android:text="Art"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="424dp"
+        android:layout_height="110dp"
+        android:text="Love"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="490dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="424dp"
+        android:layout_height="110dp"
+        android:text="Nature"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.307"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintVertical_bias="0.34" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="424dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="149dp"
+        android:layout_marginBottom="132dp"
+        android:text="Funny"
+        app:layout_constraintBottom_toBottomOf="@+id/button4"
+        app:layout_constraintTop_toTopOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.681"
+        tools:layout_editor_absoluteX="-7dp" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="133dp" />
+
+    <LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="54dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="323dp"
+        tools:layout_editor_absoluteY="305dp"></LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
