@@ -25,17 +25,17 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/QOD"
         android:layout_width="424dp"
         android:layout_height="110dp"
         android:text="Quote of the Day"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="133dp" />
+        tools:layout_editor_absoluteY="134dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/artbutton"
         android:layout_width="424dp"
         android:layout_height="110dp"
         android:layout_marginTop="4dp"
@@ -43,10 +43,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.23"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/QOD" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/loveButton"
         android:layout_width="424dp"
         android:layout_height="110dp"
         android:text="Love"
@@ -56,7 +56,7 @@
         tools:layout_editor_absoluteY="490dp" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/natureButton"
         android:layout_width="424dp"
         android:layout_height="110dp"
         android:text="Nature"
@@ -64,18 +64,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.307"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/loveButton"
         app:layout_constraintVertical_bias="0.34" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/funnyButton"
         android:layout_width="424dp"
         android:layout_height="110dp"
         android:layout_marginTop="149dp"
         android:layout_marginBottom="132dp"
         android:text="Funny"
-        app:layout_constraintBottom_toBottomOf="@+id/button4"
-        app:layout_constraintTop_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="@+id/loveButton"
+        app:layout_constraintTop_toTopOf="@+id/artbutton"
         app:layout_constraintVertical_bias="0.681"
         tools:layout_editor_absoluteX="-7dp" />
 
