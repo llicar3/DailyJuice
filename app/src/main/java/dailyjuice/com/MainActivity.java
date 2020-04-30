@@ -1,5 +1,6 @@
 package dailyjuice.com;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button QOD = (Button) findViewById(R.id.QOD);
-        ------intent.getextra("QOD", String);
+        Intent qodIntent = new Intent(this, SecondActivity.class);
+        startActivity(qodIntent);
+        //intent.getextra("QOD", String);
         QOD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,10 +37,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(),"Juicing!", Toast.LENGTH_SHORT).show();
                 requestQuote("quoteoftheday");
-                moveToActivityTwo();
+                //startActivity(qodIntent);
+
             }
         });
-        final Button funnyButton = (Button) findViewById(R.id.funnyButton);
+        Button funnyButton = (Button) findViewById(R.id.funnyButton);
+        Intent funnyIntent = new Intent(this, SecondActivity.class);
+        startActivity(funnyIntent);
         funnyButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,10 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 requestQuote("funny");
-                moveToActivityTwo();
             }
         }));
         Button loveButton = (Button) findViewById(R.id.loveButton);
+        Intent loveIntent = new Intent(this, SecondActivity.class);
+        startActivity(loveIntent);
         loveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,10 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 requestQuote("love");
-                moveToActivityTwo();
             }
         });
         Button artButton = (Button) findViewById(R.id.artbutton);
+        Intent artIntent = new Intent(this, SecondActivity.class);
+        startActivity(artIntent);
         artButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 requestQuote("art");
-                moveToActivityTwo();
             }
         });
         Button natureButton = (Button) findViewById(R.id.natureButton);
+        Intent natureIntent = new Intent(this, SecondActivity.class);
+        startActivity(natureIntent);
         natureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 requestQuote("nature");
-                moveToActivityTWo();
             }
         });
 
@@ -96,8 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("malformed url");
             }
 
-
-            try{
+            try {
                 //make connection
                 HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                 urlc.setRequestMethod("GET");

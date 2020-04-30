@@ -15,7 +15,8 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
         setContentView(R.layout.activity_second);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //Button backSpace = (Button) findViewById(R.id.QOD);

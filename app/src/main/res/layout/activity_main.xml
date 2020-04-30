@@ -8,7 +8,7 @@
     tools:visibility="visible">
 
     <EditText
-        android:id="@+id/Daily Juice"
+        android:id="@+id/DailyJuice"
         android:layout_width="94dp"
         android:layout_height="53dp"
         android:layout_marginStart="24dp"
