@@ -2,6 +2,7 @@ package dailyjuice.com;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.URL;
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote();
-                String quote = q.requestQuote("art");
+                String quote = q.execute("funny");
                 artIntent.putExtra("quote", quote);
                 startActivity(artIntent);
             }
@@ -105,16 +107,17 @@ public class MainActivity extends AppCompatActivity {
     }
 };
 
-class Quote {
+class Quote extends AsyncTask<String, String, String> {
+
+    protected String doInBackground(String category) {
+        requestQuote(category);
+    }
+
     public String requestQuote(String category){
+        StringBuilder response = new StringBuilder();
         try {
             String urlString = "https://quotes.rest/qod?category=" + category;
             URL url = new URL(urlString);
-        } catch (Exception e) {
-            System.out.println("malformed url");
-        }
-
-        try {
             //make connection
             HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
             urlc.setRequestMethod("GET");
@@ -126,23 +129,19 @@ class Quote {
             urlc.connect();
 
             //get result
-            StringBuilder response = new StringBuilder(); 
             String currentLine;
+            InputStream inputStream = null;
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            inputStream));
             while ((currentLine = in.readLine()) != null) {
-         response.append(currentLine); 
+                response.append(currentLine);
             }
             in.close();
-            return response.toString();
-//                BufferedReader br = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
-//              String l = null;
-//                while ((l = br.readLine()) != null) {
-//                    System.out.println(l);
-//               }
-//                br.close();
         } catch (Exception e) {
-            System.out.println("Error occurred");
             System.out.println(e.toString());
         }
+        return response.toString();
     }
 };
 
