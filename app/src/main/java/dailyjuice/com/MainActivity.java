@@ -122,10 +122,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            System.out.println(result);
             super.onPostExecute(result);
-            Intent intent = new Intent(context, SecondActivity.class);
-            context.startActivity(intent);
-            ((MainActivity)context).finish();
+            Context c = getApplicationContext();
+            Intent intent = new Intent(c, SecondActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            c.startActivity(intent);
+            ((MainActivity)c).finish();
+
         }
 
         public String requestQuote(String category){
