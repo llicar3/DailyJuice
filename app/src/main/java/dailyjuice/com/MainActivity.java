@@ -1,5 +1,6 @@
 package dailyjuice.com;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -84,9 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote();
-                String quote = q.execute("funny");
-                artIntent.putExtra("quote", quote);
-                startActivity(artIntent);
+                q.execute("funny");
             }
         });
 
@@ -105,44 +105,62 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-};
 
-class Quote extends AsyncTask<String, String, String> {
+    private class Quote extends AsyncTask<String, Void, String> {
+        private TextView finalResult;
+        private Context context;
 
-    protected String doInBackground(String category) {
-        requestQuote(category);
-    }
-
-    public String requestQuote(String category){
-        StringBuilder response = new StringBuilder();
-        try {
-            String urlString = "https://quotes.rest/qod?category=" + category;
-            URL url = new URL(urlString);
-            //make connection
-            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-            urlc.setRequestMethod("GET");
-            // set the content type
-            urlc.setRequestProperty("Content-Type", "application/json");
-            urlc.setRequestProperty("X-TheySaidSo-Api-Secret", "YOUR API KEY HERE");
-            System.out.println("Connect to: " + url.toString());
-            urlc.setAllowUserInteraction(false);
-            urlc.connect();
-
-            //get result
-            String currentLine;
-            InputStream inputStream = null;
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(
-                            inputStream));
-            while ((currentLine = in.readLine()) != null) {
-                response.append(currentLine);
-            }
-            in.close();
-        } catch (Exception e) {
-            System.out.println(e.toString());
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
         }
-        return response.toString();
-    }
+
+        @Override
+        protected String doInBackground(String... category) {
+            return requestQuote(category[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Intent intent = new Intent(context, SecondActivity.class);
+            context.startActivity(intent);
+            ((MainActivity)context).finish();
+        }
+
+        public String requestQuote(String category){
+            StringBuilder response = new StringBuilder();
+            try {
+                String urlString = "https://quotes.rest/qod?category=" + category;
+                URL url = new URL(urlString);
+                //make connection
+                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                urlc.setRequestMethod("GET");
+                // set the content type
+                urlc.setRequestProperty("Content-Type", "application/json");
+                urlc.setRequestProperty("X-TheySaidSo-Api-Secret", "YOUR API KEY HERE");
+                System.out.println("Connect to: " + url.toString());
+                urlc.setAllowUserInteraction(false);
+                urlc.connect();
+
+                //get result
+                String currentLine;
+                InputStream inputStream = null;
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(
+                                inputStream));
+                while ((currentLine = in.readLine()) != null) {
+                    response.append(currentLine);
+                }
+                in.close();
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+            return response.toString();
+        }
+    };
+
 };
+
 
 
