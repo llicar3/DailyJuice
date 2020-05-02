@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button funnyButton = (Button) findViewById(R.id.funnyButton);
+        final Button funnyButton = (Button) findViewById(R.id.funnyButton);
         funnyButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote();
-                String quote = q.requestQuote("love");
+                String quote = q.requestQuote("QOD");
                 loveIntent.putExtra("quote", quote);
                 startActivity(loveIntent);
             }
         });
 
-        Button artButton = (Button) findViewById(R.id.artbutton);
+        Button artButton = (Button) findViewById(R.id.artButton);
         artButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +86,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote();
-                q.execute("funny");
+                String quote = q.requestQuote("QOD");
+                artIntent.putExtra("quote", quote);
+                startActivity(artIntent);
             }
         });
 
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote();
-                String quote = q.requestQuote("nature");
+                String quote = q.requestQuote("QOD");
                 natureIntent.putExtra("quote", quote);
                 startActivity(natureIntent);
             }
