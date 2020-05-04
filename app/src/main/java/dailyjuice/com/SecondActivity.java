@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
@@ -15,17 +16,15 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, SecondActivity.class);
-        startActivity(intent);
         setContentView(R.layout.activity_second);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Button backSpace = (Button) findViewById(R.id.QOD);
-        //backSpace.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View v) {
-                //v.setBackgroundColor(Color.GREEN);
-                //Log.d("Daily Juice", "my app");
-                //Toast.makeText(getApplicationContext(),"Juicing!", Toast.LENGTH_SHORT).show();
-
+        Intent intent = new Intent();
+        String quote = intent.getStringExtra("quote");
+        TextView textView = findViewById(R.id.textView);
+        textView.setText(quote);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Intent intents = new Intent();
+        //String category = intents.getStringExtra("category");
+        //TextView topicText = findViewById(R.id.topicText);
+        //topicText.setText(category);
     }
 }
