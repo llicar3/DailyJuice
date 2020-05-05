@@ -12,23 +12,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static String category = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        category = "";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         QOD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent qodIntent = new Intent(getApplicationContext(), SecondActivity.class);
                 v.setBackgroundColor(Color.GREEN);
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote(getApplicationContext());
-                q.execute("QOD");
+                category = "Quote of the Day";
+                q.execute("");
                 //String quote = q.requestQuote("QOD");
                 //qodIntent.putExtra("quote", quote);
                 //startActivity(qodIntent);
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote(getApplicationContext());
+                category = "Funny";
                 q.execute("funny");
                 //String quote = q.requestQuote("funny");
                 //funnyIntent.putExtra("quote", quote);
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote(getApplicationContext());
+                category = "Love";
                 q.execute("love");
                 //String quote = q.requestQuote("QOD");
                 //loveIntent.putExtra("quote", quote);
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote(getApplicationContext());
+                category = "Art";
                 q.execute("art");
                 //String quote = q.requestQuote("QOD");
                 //artIntent.putExtra("quote", quote);
@@ -107,12 +110,22 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daily Juice", "my app");
                 Toast.makeText(getApplicationContext(), "Juicing!", Toast.LENGTH_SHORT).show();
                 Quote q = new Quote(getApplicationContext());
+                category = "Nature";
                 q.execute("nature");
                 //String quote = q.requestQuote("QOD");
                 //natureIntent.putExtra("quote", quote);
                 //startActivity(natureIntent);
             }
         });
+    }
+
+    public void startNewActivity(String quote) {
+        System.out.println("about to start new activity with quote: " + quote);
+        Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("quote", quote);
+        intent.putExtra("category", category);
+        startActivity(intent);
     }
 
     private class Quote extends AsyncTask<String, Void, String> {
@@ -137,19 +150,19 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             System.out.println("quote: " + result);
-            JSONObject json;
             try {
-                json = new JSONObject(result);
-                String contents = (String) json.get("contents");
+                JSONObject json = new JSONObject(result);
+                JSONObject contents = json.getJSONObject("contents");
+                JSONArray quotes = contents.getJSONArray("quotes");
+                JSONObject quote = quotes.getJSONObject(0);
+                String q = quote.getString("quote");
+                System.out.println("q: " + q);
+                startNewActivity(q);
+
+                super.onPostExecute(result);
             } catch (Exception e) {
                 System.out.println("threw json exception" + e.toString());
             }
-
-            super.onPostExecute(result);
-            Intent intent = new Intent(context, SecondActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("quote", result);
-            context.startActivity(intent);
         }
 
         public String requestQuote(String category){
@@ -162,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 urlc.setRequestMethod("GET");
                 // set the content type
                 urlc.setRequestProperty("Content-Type", "application/json");
-                urlc.setRequestProperty("X-TheySaidSo-Api-Secret", "YOUR API KEY HERE");
+                urlc.setRequestProperty("X-TheySaidSo-Api-Secret", "Icw5mQvxNnr5r00_UHKs6geF");
                 System.out.println("Connect to: " + url.toString());
                 urlc.setAllowUserInteraction(false);
                 urlc.connect();

@@ -17,14 +17,13 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         String quote = intent.getStringExtra("quote");
+        System.out.println("quote from second activity: " + quote);
         TextView textView = findViewById(R.id.textView);
         textView.setText(quote);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Intent intents = new Intent();
-        //String category = intents.getStringExtra("category");
-        //TextView topicText = findViewById(R.id.topicText);
-        //topicText.setText(category);
+        String c = intent.getStringExtra("category");
+        TextView category = findViewById(R.id.category);
+        category.setText(c);
     }
 }
